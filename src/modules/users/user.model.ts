@@ -1,5 +1,6 @@
 import { Schema, model } from 'mongoose';
 import { TUser } from './user.interface';
+// import config from '../../app/config';
 
 const userSchema = new Schema<TUser>({
   userId: { type: Number },
@@ -34,5 +35,27 @@ const userSchema = new Schema<TUser>({
     },
   },
 });
+
+// userSchema.virtual('fullName').get(function () {
+//   return this.firstName + this.name.lastName;
+// });
+
+// // pre save middleware/ hook : will work on create()  save()
+// userSchema.pre('save', async function (next) {
+//   // console.log(this, 'pre hook : we will save  data');
+//   // eslint-disable-next-line @typescript-eslint/no-this-alias
+//   const users = this;
+//   users.password = await bcrypt.hash(
+//     users.password,
+//     Number(config.bcrypt_salt_rounds),
+//   );
+//   next();
+// });
+
+// // post save middleware / hook
+// userSchema.post('save', function (doc, next) {
+//   doc.password = '';
+//   next();
+// });
 
 export const User = model<TUser>('User', userSchema);
